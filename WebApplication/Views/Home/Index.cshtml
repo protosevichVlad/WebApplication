@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication.Models.User>;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+<form method="post">
+    <div>
+        <button class="btn btn-light" asp-action="Block">Block</button>
+        <button class="btn btn-light" asp-action="Unblock">Unblock</button>
+        <button class="btn btn-light" asp-action="Delete">Delete</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" id="mainCheckbox" onchange="changeAllCheckboxs()" />
+                    </th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>DateTime registration</th>
+                    <th>DateTime last login</th>
+                    <th>Lockout</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="Ids" value="@user.Id" />
+                    </td>
+                    <td>
+                        @user.Id
+                    </td>
+                    <td>
+                        @user.Name
+                    </td>
+                    <td>
+                        @user.Email
+                    </td>
+                    <td>
+                        @user.DateTimeRegistration
+                    </td>
+                    <td>
+                        @user.LastLogin
+                    </td>
+                    <td>
+                        @user.LockoutEnabled
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+}
